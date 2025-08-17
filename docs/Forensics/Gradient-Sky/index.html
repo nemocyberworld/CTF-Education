@@ -1,0 +1,106 @@
+<h2 class="text-2xl font-bold mb-4">🩸 CSI CTF Forensics: Gradient Sky</h2>
+<p class="text-gray-300 mb-4">A simple steganography-based challenge where the flag is hidden inside an image file using basic string embedding techniques.</p>
+
+<ul class="list-disc ml-6 text-gray-400 space-y-2 mb-6">
+  <li>Impact: Hidden data retrieval via steganography</li>
+  <li>Vector: Embedded strings in image binary</li>
+  <li>PoC: <a href="sky.jpg" target="_blank" class="text-blue-400 underline">Challenge Image</a></li>
+</ul>
+
+<h3 class="text-xl font-bold text-gray-100 mb-2">🔍 What is Gradient Sky?</h3>
+<p class="text-gray-300 mb-4">
+This challenge tests the ability to analyze image files for hidden data. By inspecting the binary with simple tools, a hidden flag string can be extracted.
+</p>
+
+<h3 class="text-xl font-bold text-gray-100 mb-2">🧪 Test Environment Requirements</h3>
+<ul class="list-disc ml-6 text-gray-400 space-y-2 mb-6">
+  <li>Linux terminal or equivalent shell</li>
+  <li><code>strings</code> utility installed</li>
+  <li>Basic knowledge of grep and file inspection</li>
+</ul>
+
+<h3 class="text-xl font-bold text-gray-100 mb-2">⚙️ Step 1: Extract Strings</h3>
+
+<h4 class="text-lg font-semibold text-gray-100 mt-4 mb-2">📄 Command</h4>
+<pre class="bg-gray-900 text-green-400 text-sm p-4 rounded overflow-x-auto whitespace-pre-wrap">
+strings sky.jpg | grep {
+</pre>
+
+<h4 class="text-lg font-semibold text-gray-100 mt-4 mb-2">📄 Output</h4>
+<p class="text-gray-300 mb-2">Among the noisy output, the flag appears clearly:</p>
+<pre class="bg-gray-900 text-green-400 text-sm p-4 rounded overflow-x-auto whitespace-pre-wrap">
+csictf{j0ker_w4snt_happy}
+</pre>
+
+<h3 class="text-xl font-bold text-gray-100 mb-2">🚀 Step 2: Verification</h3>
+<pre class="bg-gray-900 text-blue-400 text-sm p-4 rounded overflow-x-auto whitespace-pre-wrap">
+# The extracted flag:
+csictf{j0ker_w4snt_happy}
+</pre>
+
+<h3 class="text-xl font-bold text-gray-100 mb-2">🛡️ Mitigation</h3>
+<ul class="list-disc ml-6 text-gray-400 space-y-2 mb-6">
+  <li>Always check image metadata and binary for hidden content in CTFs.</li>
+  <li>Use layered steganalysis (strings, binwalk, exiftool, zsteg).</li>
+  <li>Be cautious with files in real-world scenarios; malicious payloads may also be hidden.</li>
+</ul>
+
+<h3 class="text-xl font-bold text-gray-100 mb-2">🧠 Summary for Beginners</h3>
+<p class="text-gray-300 mb-4">
+This challenge demonstrates the simplest steganography case: hidden flags in plain strings inside an image binary. The takeaway: always run <code>strings</code> first when solving forensic CTF problems.
+</p>
+
+<p class="text-gray-300 italic mb-4">⚠️ Remember: In real-world investigations, not just flags but sensitive data can be hidden this way!</p>
+
+<hr class="border-gray-700 my-6">
+
+<h2 class="text-2xl font-bold mb-4">🔍 How the Technique Works</h2>
+<p class="text-gray-300 mb-4">
+The <code>strings</code> utility extracts human-readable ASCII text from binaries. If the challenge creator embeds a flag directly, it will be visible in the output.
+</p>
+
+<h3 class="text-xl font-semibold text-white mb-2">Key Steps in the Process</h3>
+<ul class="list-decimal ml-6 text-gray-400 space-y-2 mb-6">
+  <li><strong>Download:</strong> Get the challenge file (<code>sky.jpg</code>).</li>
+  <li><strong>Inspect:</strong> Run <code>strings</code> to extract readable text.</li>
+  <li><strong>Filter:</strong> Use <code>grep {</code> to find flag-like patterns.</li>
+  <li><strong>Extract:</strong> Identify the correct flag string.</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-white mb-2">📎 Code Snippet Reference</h3>
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-auto text-sm">
+strings sky.jpg | grep {
+</pre>
+
+<p class="text-gray-400 mb-6">
+This works because the flag was directly embedded as a plain text string inside the image file’s binary data.
+</p>
+
+<h2 class="text-2xl font-bold mb-4 mt-10">💀 Exploit Variant</h2>
+<p class="text-gray-300 mb-4">
+More advanced variants could hide data in metadata, appended zip archives, or bitwise manipulations instead of raw ASCII strings.
+</p>
+
+<h3 class="text-xl font-semibold text-white mb-2">📌 How It Works</h3>
+<ul class="list-decimal ml-6 text-gray-400 space-y-2 mb-6">
+  <li>Embed flag in EXIF metadata.</li>
+  <li>Hide payload in appended archive (zip-in-jpg).</li>
+  <li>Manipulate least significant bits for deep stego.</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-white mb-2">🧠 Important Notes</h3>
+<ul class="list-disc ml-6 text-gray-400 space-y-2 mb-6">
+  <li>This challenge was intentionally simple.</li>
+  <li>Real steganography may require specialized tools.</li>
+  <li>Always explore multiple techniques in CTF forensics.</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-white mb-2">📎 Code Reference</h3>
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-auto text-sm">
+// Example with exiftool
+exiftool sky.jpg
+</pre>
+
+<p class="text-gray-400">
+Reference link: <a href="https://csictf.com/" target="_blank" class="text-blue-400 underline">CSI CTF</a>
+</p>
